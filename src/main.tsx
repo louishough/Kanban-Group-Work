@@ -1,11 +1,12 @@
 import app from 'apprun';
 import Test from './test';
+import Login from './login';
 
-const state = 'Hello world - AppRun !';
+const state = 'Kanban';
 
 const view = (state) => <div>
   <h1>{state}</h1>
-  <Test />
+  <Login />
 </div>;
 
 const update = {
