@@ -1,0 +1,31 @@
+{
+  "name": "Kanban-Group-Work",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve",
+    "build": "webpack -p --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RachaelSmethills/Kanban-Group-Work.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RachaelSmethills/Kanban-Group-Work/issues"
+  },
+  "homepage": "https://github.com/RachaelSmethills/Kanban-Group-Work#readme",
+  "devDependencies": {
+    "apprun": "^2.24.0",
+    "source-map-loader": "^1.1.2",
+    "ts-loader": "^8.0.7",
+    "typescript": "^4.0.5",
+    "webpack": "^5.3.2",
+    "webpack-cli": "^4.1.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
