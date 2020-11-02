@@ -1,17 +1,14 @@
 import app from 'apprun';
-import Test from './test';
-import Login from './login';
+import TaskComponent from './tasks';
 
 const state = 'Kanban';
 
 const view = (state) => <div>
-  <h1>{state}</h1>
-  <Login />
+ <TaskComponent />
 </div>;
 
 const update = {
 
 };
 
-
-app.start(document.body, state, view, update);
+app.start("project", state, view, update);
