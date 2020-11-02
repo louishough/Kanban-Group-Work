@@ -34,13 +34,13 @@ export default class TaskComponent extends Component
         <h2>{state.title}</h2>
         <ul>
             {state.tasks.map( (task:Task) => {
-               return( <li key={task}>
+               return( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
                     <span contenteditable={task.editing} 
                           onclick={(e)=>this.run("toggleEditable", task.id, e)}
                           onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}</span> &nbsp;
                     {task.status === "open" ?
                         <button onclick={ () => this.run('markDoing', task.id)}>Doing</button>
-                      : task.status === "in-progress" ?
+                        : task.status === "in-progress" ?
                         <button onclick={ () => this.run('markDone', task.id)}>Done</button>
                         : task.status === "complete" ?
                         <button onclick={ () => this.run('deleteTask', task.id)}>Delete</button>
@@ -55,6 +55,9 @@ export default class TaskComponent extends Component
             <input name="text" type="text" placeholder="Add a task" required/>
             <button>Add</button>
         </form>
+    </section>
+    <section id='deleteZone' style='border: solid red 1px' ondragover="event.preventDefault()" ondrop={e => this.run('onDropDelete', e)}>
+            Delete Zone
     </section>
    
     </div>;
@@ -122,7 +125,7 @@ export default class TaskComponent extends Component
         updateTask: async (state, id, event) => {
             const savedCaretPosition = EditCaretPositioning.saveSelection(event.currentTarget)
             if(event.key==="Escape"){
-                /* Here, you need to set the event.currentTarget.textContent back */
+                /* need to add ability to cancel editing*/
                 return {...state,
                   tasks: [...state.tasks.map(task => task.id===id
                     ? ({...task, text: task.oldText, oldText: "", editing: false })
@@ -141,6 +144,17 @@ export default class TaskComponent extends Component
                     : (task)
                   )]};
             }
+        },
+        onDragStart: async (state, event) => {
+            event.dataTransfer.setData('text', event.target.id) 
+            return {...state}
+        },
+        onDropDelete: async (state, event) => {
+            event.preventDefault()
+            const id = event.dataTransfer.getData('text')
+            const index = state.tasks.findIndex(task => task.id == id)
+            state.tasks.splice(index, 1)
+            return {... state}
         }
     }
     //this will make it easy to have multiple task components on a givenpage. Allow us to identify, tag and title. Will make easier to connect to the project page.
@@ -169,7 +183,7 @@ const EditCaretPositioning =( ()=>{
                 end: start + range.toString().length
             }
         };
-        //restores caret position(s)
+        //restores caret position(s) this was a library!!!!
         restoreSelection = function(containerEl, savedSel) {
             var charIndex = 0, range = document.createRange();
             range.setStart(containerEl, 0);
