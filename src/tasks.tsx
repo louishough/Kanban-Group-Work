@@ -59,6 +59,9 @@ export default class TaskComponent extends Component
     <section id='deleteZone' style='border: solid red 1px' ondragover="event.preventDefault()" ondrop={e => this.run('onDropDelete', e)}>
             Delete Zone
     </section>
+    <section id='doingZone' style='border: solid orange 1px' ondragover="event.preventDefault()" ondrop={e => this.run('onDropDoing', e)}>
+            Doing Zone
+    </section>
    
     </div>;
 
@@ -146,15 +149,30 @@ export default class TaskComponent extends Component
             }
         },
         onDragStart: async (state, event) => {
-            event.dataTransfer.setData('text', event.target.id) 
+            event.dataTransfer.setData('id', event.target.id)
+            event.dataTransfer.setData('status', event.target.status)
             return {...state}
         },
         onDropDelete: async (state, event) => {
             event.preventDefault()
-            const id = event.dataTransfer.getData('text')
+            const id = event.dataTransfer.getData('id')
             const index = state.tasks.findIndex(task => task.id == id)
             state.tasks.splice(index, 1)
             return {... state}
+        },
+        onDropDoing: async (state, event) => {
+            event.preventDefault()
+            const id = event.dataTransfer.getData('id')
+            const tasks = state.tasks.map((task) => {
+                if(task.id == id) {
+                    return {
+                        ...task,
+                        status: "in-progress"
+                    }
+                }
+                return task                
+            })
+            return {... state, tasks}
         }
     }
     //this will make it easy to have multiple task components on a givenpage. Allow us to identify, tag and title. Will make easier to connect to the project page.
