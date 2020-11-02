@@ -1,11 +1,9 @@
 const path = require('path');
 module.exports = {
-  entry: {
-    'dist/app': './src/main.tsx',
-  },
+  entry: "./src/main.tsx",
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname)
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'kanban-app', 'public')
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
