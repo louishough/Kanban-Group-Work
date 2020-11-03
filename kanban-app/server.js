@@ -27,8 +27,9 @@ const getUser = async(id) => {
 
 // Login - default page
 app.get('/', async(req, res) => {
-    // data
-    res.render('login', {})
+    const users = await User.findAll();
+    console.log('hello', users)
+    res.render('login', {users})
 });
 
 // TaskList
