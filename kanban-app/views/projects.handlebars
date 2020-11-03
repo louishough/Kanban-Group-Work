@@ -10,7 +10,7 @@
         <div class="card-body">
             <h5 data-id="{{this.id}}" class="card-title" contenteditable="true">{{this.name}}</h5>
             <form method="POST" action="/project/{{this.id}}/delete">
-                <button type="submit" class="btn btn-primary">Delete</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
             </form>
         </div>
     </div>
@@ -20,7 +20,6 @@
         <div class="card-body">
             <form method="POST" action="/project/add">
                 <div class="form-group">
-                    <label for="formGroupExampleInput">Example label</label>
                     <input type="text" class="form-control" name="name" placeholder="Project Name">
                     <input type="hidden" name="userid" value="{{userid}}">
                 </div>
