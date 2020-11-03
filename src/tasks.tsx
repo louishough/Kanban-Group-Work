@@ -28,10 +28,9 @@ export default class TaskComponent extends Component
 
     view = (state) => <div>
     <h1>Kanban | Task Page</h1> 
-    <button>Return Home</button>
-    <h2>Project Title</h2>
+    <h2 class="tasktitles">Project Title</h2>
     <section>
-        <h2>{state.title}</h2>
+        <h2 class="tasktitles">{state.title}</h2>
     </section>
     <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
         <li class="nav-item">
@@ -64,7 +63,7 @@ export default class TaskComponent extends Component
                 </li> )
             })}
         </ul>
-                <form onsubmit={e => this.run('addTask', e)}>
+                <form id="newTask"onsubmit={e => this.run('addTask', e)}>
                     <input name="text" type="text" placeholder="Add a task" required/>
                     <button>Add</button>
                 </form>
