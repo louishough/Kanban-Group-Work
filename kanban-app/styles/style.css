@@ -22,6 +22,7 @@
 }
 .login{
     padding:10px;
+    
 }
 .create{
     display:flex;
@@ -34,9 +35,6 @@
     justify-content: center;
 
 }
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid black
-}
+img {
+    border-radius: 50%;
+  }

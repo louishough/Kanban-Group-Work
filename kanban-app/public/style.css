@@ -9,7 +9,12 @@ body {
 .bi-plus-circle, button{
     cursor: pointer;
 }
-
+.square{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 #loginSquare{
     display:flex;
     flex-direction: column;
@@ -107,3 +112,33 @@ section#doneZone {
 li {
     margin:5px 5px 10px 5px;   
 }
+.avatarWrap{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+.avatar{
+    position: relative;
+}
+.avatar img{
+    border-radius: 50%;
+    width:6rem;
+    height:6rem;
+    padding:.3rem;
+    object-fit: cover;
+    
+}
+.userName{
+    visibility: hidden;
+    color:white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.avatar:hover .userName {
+    visibility: visible;
+    opacity: 1;
+  }
