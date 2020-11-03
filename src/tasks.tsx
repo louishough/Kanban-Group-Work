@@ -47,47 +47,48 @@ export default class TaskComponent extends Component
             <div class="tab-pane fade show active" id="pills-todo" role="tabpanel" aria-labelledby="pills-home-tab">
             <section id="todoZone">
             {state.tasks.filter(task => task.status==='open').length>0 ? 
-            <ul>
+            <ul class="tasklist">
                 {state.tasks.filter(task=>task.status==='open').map(task=>(
                ( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
                <span contenteditable={task.editing} 
                      onclick={(e)=>this.run("toggleEditable", task.id, e)}
                      onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}</span> &nbsp;
                {task.status === "open" ?
-                   <button onclick={ () => this.run('markDoing', task.id)}>Doing</button>
+                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
                    : task.status === "in-progress" ?
-                   <button onclick={ () => this.run('markDone', task.id)}>Done</button>
+                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDone', task.id)}>Done</button>
                    : task.status === "complete" ?
-                   <button onclick={ () => this.run('deleteTask', task.id)}>Delete</button>
-                   : <button onclick={ () => this.run('markDoing', task.id)}>Doing</button>
+                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('deleteTask', task.id)}>Delete</button>
+                   : <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
                }
            </li> )
                 ))}
             </ul>
-        : <div>No doing tasks!</div>
+        : <div>No tasks!</div>
         }
-                <form id="newTask"onsubmit={e => this.run('addTask', e)}>
-                    <input name="text" type="text" placeholder="Add a task" required/>
-                    <button>Add</button>
-                </form>
+
             </section>
+            <form class="col align-self-center pull-bottom"id="newTask"onsubmit={e => this.run('addTask', e)}>
+                    <input name="text" type="text" placeholder="Add a task" required/>
+                    <button class="btn btn-dark pull-right btn-sm">Add</button>
+                </form>
             </div>
             <div class="tab-pane fade" id="pills-doing" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <section id='doingZone' style='border: solid orange 1px' ondragover="event.preventDefault()" ondrop={e => this.run('onDropDoing', e)}>
                 {state.tasks.filter(task => task.status==='in-progress').length>0 ? 
-            <ul>
+            <ul class="tasklist">
                 {state.tasks.filter(task=>task.status==='in-progress').map(task=>(
                ( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
                <span contenteditable={task.editing} 
                      onclick={(e)=>this.run("toggleEditable", task.id, e)}
                      onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}</span> &nbsp;
                {task.status === "open" ?
-                   <button onclick={ () => this.run('markDoing', task.id)}>Doing</button>
+                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
                    : task.status === "in-progress" ?
-                   <button onclick={ () => this.run('markDone', task.id)}>Done</button>
-                   : task.status === "complete" ?
-                   <button onclick={ () => this.run('deleteTask', task.id)}>Delete</button>
-                   : <button onclick={ () => this.run('markDoing', task.id)}>Doing</button>
+                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDone', task.id)}>Done</button>
+                   : task.status === "complete pull-right btn-sm" ?
+                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('deleteTask', task.id)}>Delete</button>
+                   : <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
                }
            </li> )
                 ))}
@@ -99,19 +100,19 @@ export default class TaskComponent extends Component
             <div class="tab-pane fade" id="pills-done" role="tabpanel" aria-labelledby="pills-contact-tab">
                 <section id='doneZone' style='border: solid green 1px' ondragover="event.preventDefault()" ondrop={e => this.run('onDropDone', e)}>
                 {state.tasks.filter((task: Task) => task.status==='complete').length>0 ? 
-            <ul>
+            <ul class="tasklist">
                 {state.tasks.filter((task:Task)=>task.status==='complete').map((task: Task)=>(
                ( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
                <span contenteditable={task.editing} 
                      onclick={(e)=>this.run("toggleEditable", task.id, e)}
                      onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}</span> &nbsp;
                {task.status === "open" ?
-                   <button onclick={ () => this.run('markDoing', task.id)}>Doing</button>
+                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
                    : task.status === "in-progress" ?
-                   <button onclick={ () => this.run('markDone', task.id)}>Done</button>
+                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDone', task.id)}>Done</button>
                    : task.status === "complete" ?
-                   <button onclick={ () => this.run('deleteTask', task.id)}>Delete</button>
-                   : <button onclick={ () => this.run('markDoing', task.id)}>Doing</button>
+                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('deleteTask', task.id)}>Delete</button>
+                   : <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
                }
            </li> )
                 ))}

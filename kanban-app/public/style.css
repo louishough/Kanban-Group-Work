@@ -1,3 +1,11 @@
+html {
+    height: 100vh;
+}
+
+body {
+    height: 100vh;
+}
+
 .bi-plus-circle, button{
     cursor: pointer;
 }
@@ -49,15 +57,53 @@ section#deleteZone {
     text-align: center;
 }
 section#todoZone {
-    border: 1px solid red;
+    margin-top: 2rem;
+    background-color: #D05353;
+    border: 1px solid black;
+    min-height: 20rem;
+    position: relative;
+}
+section#doingZone {
+    margin-top: 2rem;
+    background-color: #FFCF70;
+    border: 1px solid black;
+    min-height: 20rem;
+    position: relative;
+}
+section#doneZone {
+    margin-top: 2rem;
+    background-color: #4DA167;
+    border: 1px solid black;
+    min-height: 20rem;
+    position: relative;
 }
 #newTask input {
-    width: 85%;
+    width: 84%;
     text-align: center;
-    padding-left: 3px;
-    padding-right: 3px
+    background-color: white;
+    border: #D05353;
+    height: 30px;
+}
+#newTask {
+    position: inline;
+    margin-top: 5px;
+    bottom: 0;
+    margin-bottom: 7.5px;
+    white-space: nowrap;
+    background-color: #D05353;
+    border: 1px solid black;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .tasktitles {
     text-align: center;
     padding: 5px;
+}
+.tasklist {
+    text-align: center;
+    list-style: upper-roman;
+    
+}
+li {
+    margin:5px 5px 10px 5px;   
 }
