@@ -107,3 +107,27 @@ section#doneZone {
 li {
     margin:5px 5px 10px 5px;   
 }
+
+.desktopOnly {
+    display: none;
+}
+
+@media only screen and (min-width: 768px) {
+
+    .mobileOnly {
+        display: none;
+    }
+
+    .desktopOnly {
+        display: block;
+    }
+
+    .desktopContent {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-template-rows: auto;
+        grid-gap: 15px;
+    }
+
+
+  }
