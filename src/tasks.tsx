@@ -35,13 +35,13 @@ export default class TaskComponent extends Component
     </section>
     <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-todo" role="tab" aria-controls="pills-home" aria-selected="true">Todo</a>
+        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-todo" role="tab" aria-controls="pills-home" aria-selected="true">Todo</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-doing" role="tab" aria-controls="pills-profile" aria-selected="false">Doing</a>
+        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-doing" role="tab" aria-controls="pills-profile" aria-selected="false">Doing</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-done" role="tab" aria-controls="pills-contact" aria-selected="false">Done</a>
+        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-done" role="tab" aria-controls="pills-contact" aria-selected="false">Done</a>
         </li>
     </ul>
         <div class="tab-content" id="pills-tabContent">
