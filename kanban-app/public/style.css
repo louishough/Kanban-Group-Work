@@ -1,0 +1,51 @@
+.bi-plus-circle, button{
+    cursor: pointer;
+}
+
+#loginSquare{
+    display:flex;
+    flex-direction: column;
+    border:2px solid black;
+    align-items: center;
+    justify-content: center;
+    width:500px;
+    padding:.5rem;
+}
+#createSquare{
+    display:none;
+    flex-direction: column;
+    border:2px solid black;
+    width:500px;
+    align-items: center;
+    justify-content: center;
+    padding:.5rem;
+}
+.login{
+    padding:10px;
+}
+.create{
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+}
+.squares{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid black
+}
+
+section#deleteZone {
+    max-width: 5em;
+    max-height: 5em;
+    text-align: center;
+}
+section#todoZone {
+    border: 1px solid red;
+}

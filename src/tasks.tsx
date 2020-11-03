@@ -32,7 +32,22 @@ export default class TaskComponent extends Component
     <h2>Project Title</h2>
     <section>
         <h2>{state.title}</h2>
-        <ul>
+    </section>
+    <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-todo" role="tab" aria-controls="pills-home" aria-selected="true">Todo</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-doing" role="tab" aria-controls="pills-profile" aria-selected="false">Doing</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-done" role="tab" aria-controls="pills-contact" aria-selected="false">Done</a>
+        </li>
+    </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-todo" role="tabpanel" aria-labelledby="pills-home-tab">
+            <section id="todoZone">
+            <ul>
             {state.tasks.map( (task:Task) => {
                return( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
                     <span contenteditable={task.editing} 
@@ -49,21 +64,28 @@ export default class TaskComponent extends Component
                 </li> )
             })}
         </ul>
-    </section>
-    <section>
-        <form onsubmit={e => this.run('addTask', e)}>
-            <input name="text" type="text" placeholder="Add a task" required/>
-            <button>Add</button>
-        </form>
-    </section>
-    <section id='deleteZone' style='border: solid red 1px' ondragover="event.preventDefault()" ondrop={e => this.run('onDropDelete', e)}>
-            Delete Zone
-    </section>
-    <section id='doingZone' style='border: solid orange 1px' ondragover="event.preventDefault()" ondrop={e => this.run('onDropDoing', e)}>
-            Doing Zone
-    </section>
-    <section id='doneZone' style='border: solid green 1px' ondragover="event.preventDefault()" ondrop={e => this.run('onDropDone', e)}>
-            Done Zone
+                <form onsubmit={e => this.run('addTask', e)}>
+                    <input name="text" type="text" placeholder="Add a task" required/>
+                    <button>Add</button>
+                </form>
+            </section>
+            </div>
+            <div class="tab-pane fade" id="pills-doing" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <section id='doingZone' style='border: solid orange 1px' ondragover="event.preventDefault()" ondrop={e => this.run('onDropDoing', e)}>
+                    Doing Zone
+                </section>
+            </div>
+            <div class="tab-pane fade" id="pills-done" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <section id='doneZone' style='border: solid green 1px' ondragover="event.preventDefault()" ondrop={e => this.run('onDropDone', e)}>
+                    Done Zone
+                </section>
+            </div>
+        </div>
+    <section id='deleteZone' ondragover="event.preventDefault()" ondrop={e => this.run('onDropDelete', e)}>
+        <svg width="5em" height="5em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+        </svg>
     </section>
    
     </div>;
