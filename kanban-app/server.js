@@ -27,8 +27,9 @@ const getUser = async(id) => {
 
 // Login - default page
 app.get('/', async(req, res) => {
-    // data
-    res.render('login', {})
+    const users = await User.findAll();
+    console.log('hello', users)
+    res.render('login', {users})
 });
 
 // TaskList
@@ -41,7 +42,10 @@ app.get('/', async(req, res) => {
 
 // Add a User
 app.post('/users/add', async(req, res) => {
-    const user = await User.create(req.body)
+    console.log('Details provided', req.body);
+    const { name, avatarUrl } = req.body;
+    const user = await User.create({ name: name, avatarUrl: avatarUrl});
+    console.log('I have made:', user);
     res.redirect(`/projects/${user.id}`)
 });
 

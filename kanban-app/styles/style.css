@@ -1,8 +1,42 @@
-.flex-grid-thirds {
-    display: flex;
-    justify-content: space-between;
+.bi-plus-circle, button{
+    cursor: pointer;
 }
 
-.flex-grid-thirds .col {
-    width: 32%;
+#loginSquare{
+    display:flex;
+    flex-direction: column;
+    border:2px solid black;
+    align-items: center;
+    justify-content: center;
+    width:500px;
+    padding:.5rem;
 }
+#createSquare{
+    display:none;
+    flex-direction: column;
+    border:2px solid black;
+    width:500px;
+    align-items: center;
+    justify-content: center;
+    padding:.5rem;
+}
+.login{
+    padding:10px;
+    
+}
+.create{
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+}
+.squares{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+img {
+    border-radius: 50%;
+  }
+
+
