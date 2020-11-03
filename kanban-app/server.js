@@ -84,9 +84,8 @@ app.get('/tasks/:id/delete', async(req, res) => {
 });
 
 app.get('/tasks/:id', async(req, res) => {
-    const data = await getUser(req.params.id);
-    const tasks = await data.getTasks();
-    res.render('tasklist', { tasks });
+
+    res.render('tasklist', {});
 });
 
 
@@ -119,8 +118,13 @@ app.post('/project/:id/delete', async(req, res) => {
     const project = await Project.findByPk(req.params.id)
     project.destroy();
     console.log('Project is bye bye');
-    console.log(req.get('host'));
     res.redirect('/projects/1');
+});
+
+// Delete a project
+app.post('/project/:id/update', async(req, res) => {
+    const project = await Project.findByPk(req.params.id)
+    project.update({ name: req.body.name });
 });
 
 // Single project.. do we need?
@@ -139,5 +143,5 @@ app.get('/project/:id', async(req, res) => {
 
 
 http.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Example app listening at http://localhost:${port}`);
 })

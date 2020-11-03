@@ -8,7 +8,7 @@
     {{#each projects}}
     <div class="card col">
         <div class="card-body">
-            <h5 class="card-title">{{this.name}}</h5>
+            <h5 data-id="{{this.id}}" class="card-title" contenteditable="true">{{this.name}}</h5>
             <form method="POST" action="/project/{{this.id}}/delete">
                 <button type="submit" class="btn btn-primary">Delete</button>
             </form>
@@ -31,3 +31,23 @@
         </div>
     </div>
 </div>
+
+<script>
+Array.from(document.querySelectorAll('[contenteditable]')).forEach(function(element, index, array){
+  element.addEventListener('input', function(event) {
+      var projectId = event.srcElement.dataset.id;
+      var newName = event.srcElement.innerText;
+
+      console.log(event.srcElement.innerText);
+      fetch('/project/'+ projectId +'/update', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name: newName})
+        });
+    
+  });
+})
+</script>

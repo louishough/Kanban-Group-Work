@@ -11,7 +11,8 @@ class Task extends Model {}
 User.init({
     id: {
         type: DataTypes.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     name: DataTypes.STRING,
     avatarUrl: DataTypes.STRING
@@ -21,7 +22,8 @@ User.init({
 Project.init({
     id: {
         type: DataTypes.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     name: DataTypes.STRING
 
@@ -30,7 +32,8 @@ Project.init({
 Task.init({
     id: {
         type: DataTypes.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     desc: DataTypes.STRING,
     status: DataTypes.NUMBER
