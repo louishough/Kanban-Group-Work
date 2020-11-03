@@ -37,10 +37,10 @@ Task.init({
 
 }, { sequelize, modelName: 'task' });
 
-User.hasMany(Project);
+User.hasMany(Project, {as: 'projects'});
 Project.belongsTo(User);
 
-Project.hasMany(Task);
+Project.hasMany(Task, {as: 'tasks'});
 Task.belongsTo(Project);
 
 sequelize.sync().then(async() => {

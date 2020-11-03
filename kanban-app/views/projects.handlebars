@@ -1,3 +1,10 @@
-<h1>
-    WORKING - Projects
-</h1>
+<h1>Welcome, {{user.name}}!</h1>
+<img class="avatar" src="{{user.avatarUrl}}">
+<section>
+    {{#each projects}}
+        <h3>{{this.name}}</h3>
+        {{#each this.tasks}}
+                <h4>{{this.desc}}</h4>
+        {{/each}}
+    {{/each}}
+</section>
