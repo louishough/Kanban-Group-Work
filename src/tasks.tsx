@@ -128,7 +128,7 @@ export default class TaskComponent extends Component
 
 
     <div class="desktopContent">
-    <section id="todoZone" class="desktopOnly">
+    <section id="todoZone" class="desktopOnly" ondragover="event.preventDefault()" ondrop={e => this.run('onDropTodo', e)}>
         {state.tasks.filter(task => task.status==='open').length>0 ? 
         <ul class="tasklist">
             {state.tasks.filter(task=>task.status==='open').map(task=>(
@@ -307,6 +307,20 @@ export default class TaskComponent extends Component
                     return {
                         ...task,
                         status: "complete"
+                    }
+                }
+                return task
+            })
+            return {...state, tasks}
+        },
+        onDropTodo: async (state, event) => {
+            event.preventDefault()
+            const id = event.dataTransfer.getData('id')
+            const tasks = state.tasks.map((task) => {
+                if(task.id == id) {
+                    return {
+                        ...task,
+                        status: "open"
                     }
                 }
                 return task
