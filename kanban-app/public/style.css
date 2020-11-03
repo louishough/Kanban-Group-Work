@@ -156,6 +156,7 @@ li {
     position: relative;
     display: flex;
     flex-direction: row;
+    
 }
 .avatar{
     position: relative;
