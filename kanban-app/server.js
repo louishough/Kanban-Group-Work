@@ -3,18 +3,20 @@ const Handlebars = require('handlebars')
 const expressHandlebars = require('express-handlebars')
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
 const app = express()
-const port = 3000;
+const port = 3001;
 const { User, Project, Task } = require('./data/database');
+var http = require('http').createServer(app);
+const io = require('socket.io').listen(http);
 
 const handlebars = expressHandlebars({
     handlebars: allowInsecurePrototypeAccess(Handlebars)
 })
 
-app.use(express.static(__dirname+'/public'));
+app.use(express.static(__dirname + '/public'));
 app.use(express.static('styles'));
 app.use(express.static('views/images'));
 app.engine('handlebars', handlebars);
-app.set('views', __dirname+'/views/')
+app.set('views', __dirname + '/views/')
 app.set('view engine', 'handlebars');
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
@@ -30,11 +32,8 @@ app.get('/', async(req, res) => {
 });
 
 // TaskList
-integratung-frontend-javascript
-app.get('/projects/:id', async (req, res) => 
-    //data
-    res.render('tasklist', {})
-});
+
+
 
 /*
     USER END POINTS
@@ -84,6 +83,12 @@ app.get('/tasks/:id/delete', async(req, res) => {
     console.log('Task removed');
 });
 
+app.get('/tasks/:id', async(req, res) => {
+    const data = await getUser(req.params.id);
+    const tasks = await data.getTasks();
+    res.render('tasklist', { tasks });
+});
+
 
 /*
     PROJECT END POINTS
@@ -92,21 +97,21 @@ app.get('/tasks/:id/delete', async(req, res) => {
 // Get the users projects
 app.get('/projects/:id', async(req, res) => {
     const user = await getUser(req.params.id);
-    const projects = await user.getProjects({
-        include: [{ model: Task, as: 'tasks' }]
-    });
+    const projects = await user.getProjects();
 
-    console.log('Your projects sir', projects);
-
-    res.render('projects', projects)
+    res.render('projects', { projects, userid: req.params.id })
 });
 
 // Add a project
-app.post('/project/:id/add', async(req, res) => {
-    const user = await getUser(req.params.id);
-    const project = await Project.create(req.body)
-    user.addProject(project);
-    res.redirect(`/projects/${req.params.id}`)
+app.post('/project/add', async(req, res) => {
+    const { name, userid } = req.body;
+    const user = await getUser(userid);
+    console.log('Hi User', user);
+    const project = await Project.create({ name, userId: Number(userid) })
+    await user.addProject(project);
+    console.log('Added project', project);
+    console.log('Body Provided', req.body);
+    res.redirect(`/projects/${userid}`)
 });
 
 // Delete a project
@@ -114,6 +119,8 @@ app.post('/project/:id/delete', async(req, res) => {
     const project = await Project.findByPk(req.params.id)
     project.destroy();
     console.log('Project is bye bye');
+    console.log(req.get('host'));
+    res.redirect('/projects/1');
 });
 
 // Single project.. do we need?
@@ -125,12 +132,12 @@ app.get('/project/:id', async(req, res) => {
         include: [{ model: Task, as: 'tasks' }]
     });
 
-    console.log('Your single project sir', project);
+    console.log('Your single project sir', { project });
 
     res.send(project);
 });
 
 
-app.listen(port, () => {
+http.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })

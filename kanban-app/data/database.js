@@ -45,7 +45,7 @@ Task.belongsTo(Project);
 
 sequelize.sync().then(async() => {
     const taskQueue = defaultData.map(async(json_data) => {
-        const user = await User.create({ id: json_data.id, name: json_data.name, avatarUrl: json_data.image });
+        const user = await User.create({ id: json_data.id, name: json_data.name, avatarUrl: json_data.avatarUrl });
         const projects = await Promise.all(json_data.projects.map(async(_project) => {
             const tasks = await Promise.all(_project.tasks.map(({ id, desc, status }) => Task.create({ id, desc, status })))
             const project = await Project.create({ id: _project.id, name: _project.name });
