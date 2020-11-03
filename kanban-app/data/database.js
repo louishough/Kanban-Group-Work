@@ -37,10 +37,11 @@ Task.init({
 
 }, { sequelize, modelName: 'task' });
 
-User.hasMany(Project, {as: 'projects'});
+User.hasMany(Project, { onDelete: 'cascade' });
 Project.belongsTo(User);
 
-Project.hasMany(Task, {as: 'tasks'});
+Project.hasMany(Task, { onDelete: 'cascade' });
+
 Task.belongsTo(Project);
 
 sequelize.sync().then(async() => {
