@@ -42,7 +42,10 @@ app.get('/', async(req, res) => {
 
 // Add a User
 app.post('/users/add', async(req, res) => {
-    const user = await User.create(req.body)
+    console.log('Details provided', req.body);
+    const { name, avatarUrl } = req.body;
+    const user = await User.create({ name: name, avatarUrl: avatarUrl});
+    console.log('I have made:', user);
     res.redirect(`/projects/${user.id}`)
 });
 
