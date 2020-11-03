@@ -1,10 +1,33 @@
-<h1>Welcome, {{user.name}}!</h1>
-<img class="avatar" src="{{user.avatarUrl}}">
-<section>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Projects</li>
+  </ol>
+</nav>
+
+<div class="flex-grid-thirds">
     {{#each projects}}
-        <h3>{{this.name}}</h3>
-        {{#each this.tasks}}
-                <h4>{{this.desc}}</h4>
-        {{/each}}
+    <div class="card col">
+        <div class="card-body">
+            <h5 class="card-title">{{this.name}}</h5>
+            <form method="POST" action="/project/{{this.id}}/delete">
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </form>
+        </div>
+    </div>
     {{/each}}
-</section>
+
+    <div class="card col">
+        <div class="card-body">
+            <form method="POST" action="/project/add">
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Example label</label>
+                    <input type="text" class="form-control" name="name" placeholder="Project Name">
+                    <input type="hidden" name="userid" value="{{userid}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <h5 class="card-title">{{this.name}}</h5>
+            <p class="card-text"></p>
+        </div>
+    </div>
+</div>

@@ -32,7 +32,7 @@ export default class TaskComponent extends Component
     <section>
         <h2 class="tasktitles">{state.title}</h2>
     </section>
-    <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
+    <ul class="nav nav-pills mb-3 nav-justified mobileOnly" id="pills-tab" role="tablist">
         <li class="nav-item">
         <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-todo" role="tab" aria-controls="pills-home" aria-selected="true">Todo</a>
         </li>
@@ -43,7 +43,7 @@ export default class TaskComponent extends Component
         <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-done" role="tab" aria-controls="pills-contact" aria-selected="false">Done</a>
         </li>
     </ul>
-        <div class="tab-content" id="pills-tabContent">
+        <div class="tab-content mobileOnly" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-todo" role="tabpanel" aria-labelledby="pills-home-tab">
             <section id="todoZone">
             {state.tasks.filter(task => task.status==='open').length>0 ? 
@@ -68,7 +68,7 @@ export default class TaskComponent extends Component
         }
 
             </section>
-            <form class="col align-self-center pull-bottom"id="newTask"onsubmit={e => this.run('addTask', e)}>
+            <form class="col align-self-center pull-bottom desktopOnly"id="newTask"onsubmit={e => this.run('addTask', e)}>
                     <input name="text" type="text" placeholder="Add a task" required/>
                     <button class="btn btn-dark pull-right btn-sm">Add</button>
                 </form>
@@ -96,9 +96,10 @@ export default class TaskComponent extends Component
         : <div>No doing tasks!</div>
         }
                 </section>
+
             </div>
             <div class="tab-pane fade" id="pills-done" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <section id='doneZone' style='border: solid green 1px' ondragover="event.preventDefault()" ondrop={e => this.run('onDropDone', e)}>
+                <section id='doneZone' class="mobileOnly" ondragover="event.preventDefault()" ondrop={e => this.run('onDropDone', e)}>
                 {state.tasks.filter((task: Task) => task.status==='complete').length>0 ? 
             <ul class="tasklist">
                 {state.tasks.filter((task:Task)=>task.status==='complete').map((task: Task)=>(
@@ -122,13 +123,71 @@ export default class TaskComponent extends Component
                 </section>
             </div>
         </div>
+   
+
+
+
+    <div class="desktopContent">
+    <section id="todoZone" class="desktopOnly" ondragover="event.preventDefault()" ondrop={e => this.run('onDropTodo', e)}>
+        {state.tasks.filter(task => task.status==='open').length>0 ? 
+        <ul class="tasklist">
+            {state.tasks.filter(task=>task.status==='open').map(task=>(
+            ( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
+                <span contenteditable={task.editing} 
+                     onclick={(e)=>this.run("toggleEditable", task.id, e)}
+                     onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}
+                </span> &nbsp;
+           </li> )
+                ))}
+        </ul>
+        : <div>No tasks!</div>
+        }
+    </section>
+
+    <section id='doingZone' class="desktopOnly" ondragover="event.preventDefault()" ondrop={e => this.run('onDropDoing', e)}>
+        {state.tasks.filter(task => task.status==='in-progress').length>0 ? 
+        <ul class="tasklist">
+            {state.tasks.filter(task=>task.status==='in-progress').map(task=>(
+            ( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
+                <span contenteditable={task.editing} 
+                     onclick={(e)=>this.run("toggleEditable", task.id, e)}
+                     onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}
+                </span> &nbsp;
+           </li> )
+                ))}
+        </ul>
+        : <div>No doing tasks!</div>
+        }
+    </section>
+
+    <section id='doneZone' class="desktopOnly" ondragover="event.preventDefault()" ondrop={e => this.run('onDropDone', e)}>
+        {state.tasks.filter((task: Task) => task.status==='complete').length>0 ? 
+        <ul class="tasklist">
+        {state.tasks.filter((task:Task)=>task.status==='complete').map((task: Task)=>(
+        ( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
+            <span contenteditable={task.editing} 
+                onclick={(e)=>this.run("toggleEditable", task.id, e)}
+                onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}
+            </span> &nbsp;
+        </li> )
+         ))}
+        </ul>
+        : <div>No done tasks!</div>
+        }
+        </section>
+    </div>
+
+    <form class="col align-self-center pull-bottom"id="newTask"onsubmit={e => this.run('addTask', e)} style="margin-top: 15px;">
+                    <input name="text" type="text" placeholder="Add a task" required/>
+                    <button class="btn btn-dark pull-right btn-sm">Add</button>
+                </form>
+
     <section id='deleteZone' ondragover="event.preventDefault()" ondrop={e => this.run('onDropDelete', e)}>
-        <svg width="5em" height="5em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
             <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
         </svg>
     </section>
-   
     </div>;
 
     update = {
@@ -248,6 +307,20 @@ export default class TaskComponent extends Component
                     return {
                         ...task,
                         status: "complete"
+                    }
+                }
+                return task
+            })
+            return {...state, tasks}
+        },
+        onDropTodo: async (state, event) => {
+            event.preventDefault()
+            const id = event.dataTransfer.getData('id')
+            const tasks = state.tasks.map((task) => {
+                if(task.id == id) {
+                    return {
+                        ...task,
+                        status: "open"
                     }
                 }
                 return task
