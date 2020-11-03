@@ -137,14 +137,6 @@ export default class TaskComponent extends Component
                      onclick={(e)=>this.run("toggleEditable", task.id, e)}
                      onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}
                 </span> &nbsp;
-               {task.status === "open" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
-                   : task.status === "in-progress" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDone', task.id)}>Done</button>
-                   : task.status === "complete" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('deleteTask', task.id)}>Delete</button>
-                   : <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
-               }
            </li> )
                 ))}
         </ul>
@@ -161,14 +153,6 @@ export default class TaskComponent extends Component
                      onclick={(e)=>this.run("toggleEditable", task.id, e)}
                      onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}
                 </span> &nbsp;
-               {task.status === "open" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
-                   : task.status === "in-progress" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDone', task.id)}>Done</button>
-                   : task.status === "complete pull-right btn-sm" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('deleteTask', task.id)}>Delete</button>
-                   : <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
-               }
            </li> )
                 ))}
         </ul>
@@ -185,14 +169,6 @@ export default class TaskComponent extends Component
                 onclick={(e)=>this.run("toggleEditable", task.id, e)}
                 onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}
             </span> &nbsp;
-               {task.status === "open" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
-                   : task.status === "in-progress" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDone', task.id)}>Done</button>
-                   : task.status === "complete" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('deleteTask', task.id)}>Delete</button>
-                   : <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
-               }
         </li> )
          ))}
         </ul>
