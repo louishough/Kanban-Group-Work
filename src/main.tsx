@@ -1,11 +1,11 @@
 import app from 'apprun';
+import TaskComponent from './tasks';
 import Test from './test';
 
 const state = 'Hello world - AppRun !';
 
 const view = (state) => <div>
-  <h1>{state}</h1>
-  <Test />
+  <TaskComponent />
 </div>;
 
 const update = {
