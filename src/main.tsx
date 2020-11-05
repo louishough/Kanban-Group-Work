@@ -1,27 +1,25 @@
 import app from 'apprun';
-import TaskComponent from './tasks';
-import Projects from './projects';
-import Login from './login';
 
-const state = 'Hello world - AppRun !';
+const element = document.getElementById('my-app');
 
-const view = (state) => <div>
+//routing for various apprun components using #hash
+@on('//', async () => {
+const module = await import('./login')
+new module.default().mount(element);
+})
+
+@on('#login', async () => {
+const module = await import('./login')
+new module.default().mount(element);
+})
+
+@on('#projects', async () => {
+const module = await import('./projects');
+new module.default().mount(element);
+})
+
+@on('#tasks', async () => {
+const module = await import('./tasks');
+new module.default().mount(element);
+})
   
-
-
-const update = {
-
-  '#/': async (state, page) => {
-    return await this.updateState(state, '', page)
-  },
-  '#/feed': async (state, page) => {
-    return await this.updateState(state, 'feed', page)
-  },
-'#/tag': async (state, tag, page) => {
-    return await this.updateState(state, 'tag', page, tag)
-  
-}
-  
-};
-
-app.start(document.body, state, view, update);
