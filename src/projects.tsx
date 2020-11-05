@@ -1,20 +1,14 @@
 import app, { Component } from 'apprun';
 
 export default class Projects extends Component {
+  state = 'Projects Page'
+  view = (state) => <div>
+    {state}  
+  </div>
 
-const state = 'Projects Page';
-
-const view = (state) => <div>
-
-{state}  
+  update = {
+    '#projects': state=>state, // <-- THIS!! 
+  }
   
-</div>;
-
-const update = {
-
-  
-};
-
-app.start(document.body, state, view, update);
-
 }
+

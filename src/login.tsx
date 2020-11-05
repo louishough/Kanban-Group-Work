@@ -3,19 +3,18 @@ import app, { Component } from 'apprun';
 export default class Login extends Component {
 
 
-const state = 'Login Page';
+state = 'Login Page';
 
-const view = (state) => <div>
+view = (state) => <div>
   
 {state}
   
 </div>;
 
-const update = {
+update = {
 
+    '#login': state=>state, // <-- THIS!! 
   
 };
-
-app.start(document.body, state, view, update);
     
 }

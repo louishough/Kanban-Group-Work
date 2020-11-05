@@ -328,7 +328,8 @@ export default class TaskComponent extends Component
                 return task
             })
             return {...state, tasks}
-        }
+        },
+        '#tasks': state=>state,
     }
     //this will make it easy to have multiple task components on a givenpage. Allow us to identify, tag and title. Will make easier to connect to the project page.
     constructor(props) {
