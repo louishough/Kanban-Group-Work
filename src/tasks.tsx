@@ -26,23 +26,24 @@ export default class TaskComponent extends Component
         storageKey: `${STORAGE_KEY}-my`
     }
 
-    view = (state) => <div>
-    <h1>Kanban | Task Page</h1> 
-    <h2 class="tasktitles">Project Title</h2>
-    <section>
-        <h2 class="tasktitles">{state.title}</h2>
-    </section>
-    <ul class="nav nav-pills mb-3 nav-justified mobileOnly" id="pills-tab" role="tablist">
-        <li class="nav-item">
-        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-todo" role="tab" aria-controls="pills-home" aria-selected="true">Todo</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-doing" role="tab" aria-controls="pills-profile" aria-selected="false">Doing</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-done" role="tab" aria-controls="pills-contact" aria-selected="false">Done</a>
-        </li>
-    </ul>
+    view = (state) => 
+    <div>
+        <h1>Kanban | Task Page</h1> 
+        <h2 class="tasktitles">Project Title</h2>
+        <section>
+            <h2 class="tasktitles">{state.title}</h2>
+        </section>
+        <ul class="nav nav-pills mb-3 nav-justified mobileOnly" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-todo" role="tab" aria-controls="pills-home" aria-selected="true">Todo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-doing" role="tab" aria-controls="pills-profile" aria-selected="false">Doing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-done" role="tab" aria-controls="pills-contact" aria-selected="false">Done</a>
+            </li>
+        </ul>
         <div class="tab-content mobileOnly" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-todo" role="tabpanel" aria-labelledby="pills-home-tab">
             <section id="todoZone">
