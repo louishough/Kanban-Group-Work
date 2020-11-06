@@ -12,6 +12,7 @@ type Task = {
 
   }
 
+  const projectStorageKey = 'projects';
   const STORAGE_KEY: string = 'to-do-list-'
 
 
@@ -19,6 +20,7 @@ type Task = {
 export default class TaskComponent extends Component
 {
     state = {
+        projectId: null,
         tasks: [],
         value: '',
         type: 'my',
@@ -26,11 +28,15 @@ export default class TaskComponent extends Component
         storageKey: `${STORAGE_KEY}-my`
     }
 
-    view = (state) => 
-    <div>
+    view = (state) => {
+        const project = getProject(state.projectId);
+
+     return(
+       <div>
         <h1>Kanban | Task Page</h1>
 
-        <h2 class="tasktitles">Project Title</h2>
+        <h2 class="tasktitles">{project.title}</h2>
+        <h3>{project.description}</h3>
         
         <section>
             <h2 class="tasktitles">{state.title}</h2>
@@ -99,7 +105,8 @@ export default class TaskComponent extends Component
             <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
         </svg>
     </section>
-    </div>;
+    </div>)
+    };
 
     update = {
         addTask: async (state, event) => {
@@ -245,7 +252,7 @@ export default class TaskComponent extends Component
         super()
         const storageKey:string = `${STORAGE_KEY}${props['type']}`
         const stored:string = localStorage.getItem(storageKey)
-        this.state = stored ? JSON.parse(stored) : {...this.state, ...props, storageKey}
+        this.state = stored ? JSON.parse(stored) : {...this.state, ...props, projectId: props["type"], storageKey}
     }
     rendered = (state) => localStorage.setItem(this.state.storageKey, JSON.stringify(state))
 }
@@ -299,3 +306,9 @@ const EditCaretPositioning =( ()=>{
         }
     return { saveSelection, restoreSelection}
 })()
+
+const getProject = (id) => {
+    const data = localStorage.getItem(projectStorageKey);
+    const projects = data ? JSON.parse(data).projects : {};
+    return projects.find(project => project.id===id);
+}

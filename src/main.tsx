@@ -18,8 +18,8 @@ const module = await import('./projects');
 new module.default().mount(element);
 })
 
-app.on('#tasks', async () => {
-const module = await import('./tasks');
-new module.default({type:'My Todos'}).mount(element);
+app.on('#tasks', async (type='my-todos') => {
+    const module = await import('./tasks');
+    new module.default({type}).mount(element);
 })
   

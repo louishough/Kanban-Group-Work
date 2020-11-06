@@ -19,10 +19,10 @@ state = {
 }
 view = (state) => 
 <div>
-{state.type}
+
 
     {/* login form */}
-    <div class="container mx-auto h-full flex justify-center items-center">
+    <div class="container mx-auto h-full flex justify-center items-center" id="login">
     <div class="w-full max-w-xs">
         <form onsubmit={(event) => this.run('login-user', event)} class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div class="mb-4">
@@ -44,31 +44,36 @@ view = (state) =>
     </div>
     </div>
 
+
     {/* signup form */}
+    <div class="container mx-auto h-full flex justify-center items-center" id="signup">
+    <div class="w-full max-w-xs">
     <form onsubmit={(event)=>this.run('add-user', event)} class="w-full max-w-lg">
     <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
     <div class="-mx-3 md:flex mb-6">
             <div class="md:w-full px-3">
-                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                     Username
                 </label>
                 <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="grid-password" name='username' type="text" placeholder="JohnSmith" />
-                <p class="text-grey-dark text-xs italic">Must be unique!</p>
+                <p class="text-gray-700 text-xs italic">Must be unique!</p>
             </div>
         </div>
         <div class="-mx-3 md:flex mb-6">
             <div class="md:w-full px-3">
-                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                     Avatar Url
                 </label>
                 <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="grid-password" name='avatar-url' type="url" placeholder="http://example.com/img.jpeg" />
-                <p class="text-grey-dark text-xs italic">.png, .jpeg, etc</p>
+                <p class="text-gray-700 text-xs italic">.png, .jpeg, etc</p>
             </div>
         </div>
-                <button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded">Continue</button>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Continue</button>
     </div>
 
     </form>
+    </div>
+    </div>
 </div>;
 
 
@@ -94,11 +99,12 @@ update = {
       const name = loginForm.get('username').toString();
       
       if(!state.users.some(user=>user.name===name)){
-          console.log(`User ${name} not found.`);
+          alert(`User ${name} not found.`);
           return state;
       }
       return {...state, ...state.users.map(user => user.name===name ? {...user, loggedIn:true} : {...user, loggedIn: false})}
     },
+
 
     '#login': state=>state, // <-- THIS!! 
   
@@ -121,5 +127,4 @@ const guidGenerator = () =>{
        return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
     };
     return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
-}
 }
