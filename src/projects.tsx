@@ -13,7 +13,7 @@ export default class Projects extends Component {
   <div>
   {state}
 
-  <div class="container mx-auto h-full flex justify-center items-center">
+  <div class="container mx-auto h-full flex justify-center items-center order-none border-4">
     <div class="max-w-sm w-full lg:max-w-full lg:flex">
       <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Tennis_Racket_and_Balls.jpg/220px-Tennis_Racket_and_Balls.jpg')" title="Woman holding a mug">
       </div>
