@@ -19,7 +19,9 @@ state = {
 }
 view = (state) => 
 <div>
-    {state.type}
+{state.type}
+
+    {/* login form */}
     <div class="container mx-auto h-full flex justify-center items-center">
     <div class="w-full max-w-xs">
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -35,13 +37,45 @@ view = (state) =>
                     Sign In
                 </button>
                 <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-                    Create a user?
+                    Create an account
                 </a>
             </div>
         </form>
     </div>
     </div>
+
+    {/* signup form */}
+    <form class="w-full max-w-lg">
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+    <div class="-mx-3 md:flex mb-6">
+            <div class="md:w-full px-3">
+                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
+                    Username
+                </label>
+                <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="grid-password" type="text" placeholder="JohnSmith" />
+                <p class="text-grey-dark text-xs italic">Must be unique!</p>
+            </div>
+        </div>
+        <div class="-mx-3 md:flex mb-6">
+            <div class="md:w-full px-3">
+                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
+                    Avatar Url
+                </label>
+                <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="grid-password" type="url" placeholder="http://example.com/img.jpeg" />
+                <p class="text-grey-dark text-xs italic">.png, .jpeg, etc</p>
+            </div>
+        </div>
+                <button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded">Continue</button>
+    </div>
+
+    </form>
+
+
+
+
+
 </div>;
+
     
 
 
