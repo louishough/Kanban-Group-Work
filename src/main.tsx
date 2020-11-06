@@ -10,7 +10,7 @@ app.on('//', async () => {
 
 app.on('#login', async () => {
 const module = await import('./login')
-new module.default().mount(element);
+new module.default({type: 'Users'}).mount(element);
 })
 
 app.on('#projects', async () => {

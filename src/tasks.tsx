@@ -28,161 +28,70 @@ export default class TaskComponent extends Component
 
     view = (state) => 
     <div>
-        <h1>Kanban | Task Page</h1> 
+        <h1>Kanban | Task Page</h1>
+
         <h2 class="tasktitles">Project Title</h2>
+        
         <section>
             <h2 class="tasktitles">{state.title}</h2>
         </section>
-        <ul class="nav nav-pills mb-3 nav-justified mobileOnly" id="pills-tab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-todo" role="tab" aria-controls="pills-home" aria-selected="true">Todo</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-doing" role="tab" aria-controls="pills-profile" aria-selected="false">Doing</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-done" role="tab" aria-controls="pills-contact" aria-selected="false">Done</a>
-            </li>
-        </ul>
-        <div class="tab-content mobileOnly" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-todo" role="tabpanel" aria-labelledby="pills-home-tab">
-            <section id="todoZone">
-            {state.tasks.filter(task => task.status==='open').length>0 ? 
-            <ul class="tasklist">
-                {state.tasks.filter(task=>task.status==='open').map(task=>(
-               ( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
-               <span contenteditable={task.editing} 
-                     onclick={(e)=>this.run("toggleEditable", task.id, e)}
-                     onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}</span> &nbsp;
-               {task.status === "open" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
-                   : task.status === "in-progress" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDone', task.id)}>Done</button>
-                   : task.status === "complete" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('deleteTask', task.id)}>Delete</button>
-                   : <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
-               }
-           </li> )
-                ))}
-            </ul>
-        : <div>No tasks!</div>
-        }
 
-            </section>
-            <form class="col align-self-center pull-bottom desktopOnly"id="newTask"onsubmit={e => this.run('addTask', e)}>
-                    <input name="text" type="text" placeholder="Add a task" required/>
-                    <button class="btn btn-dark pull-right btn-sm">Add</button>
-                </form>
-            </div>
-            <div class="tab-pane fade" id="pills-doing" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <section id='doingZone' style='border: solid orange 1px' ondragover="event.preventDefault()" ondrop={e => this.run('onDropDoing', e)}>
-                {state.tasks.filter(task => task.status==='in-progress').length>0 ? 
-            <ul class="tasklist">
-                {state.tasks.filter(task=>task.status==='in-progress').map(task=>(
-               ( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
-               <span contenteditable={task.editing} 
-                     onclick={(e)=>this.run("toggleEditable", task.id, e)}
-                     onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}</span> &nbsp;
-               {task.status === "open" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
-                   : task.status === "in-progress" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDone', task.id)}>Done</button>
-                   : task.status === "complete pull-right btn-sm" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('deleteTask', task.id)}>Delete</button>
-                   : <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
-               }
-           </li> )
-                ))}
-            </ul>
-        : <div>No doing tasks!</div>
-        }
-                </section>
-
-            </div>
-            <div class="tab-pane fade" id="pills-done" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <section id='doneZone' class="mobileOnly" ondragover="event.preventDefault()" ondrop={e => this.run('onDropDone', e)}>
-                {state.tasks.filter((task: Task) => task.status==='complete').length>0 ? 
-            <ul class="tasklist">
-                {state.tasks.filter((task:Task)=>task.status==='complete').map((task: Task)=>(
-               ( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
-               <span contenteditable={task.editing} 
-                     onclick={(e)=>this.run("toggleEditable", task.id, e)}
-                     onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}</span> &nbsp;
-               {task.status === "open" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
-                   : task.status === "in-progress" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDone', task.id)}>Done</button>
-                   : task.status === "complete" ?
-                   <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('deleteTask', task.id)}>Delete</button>
-                   : <button class="btn btn-dark pull-right btn-sm" onclick={ () => this.run('markDoing', task.id)}>Doing</button>
-               }
-           </li> )
-                ))}
-            </ul>
-        : <div>No done tasks!</div>
-        }
-                </section>
-            </div>
-        </div>
    
-
-
-
     <div class="desktopContent">
-    <section id="todoZone" class="desktopOnly" ondragover="event.preventDefault()" ondrop={e => this.run('onDropTodo', e)}>
-        {state.tasks.filter(task => task.status==='open').length>0 ? 
-        <ul class="tasklist">
-            {state.tasks.filter(task=>task.status==='open').map(task=>(
-            ( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
-                <span contenteditable={task.editing} 
-                     onclick={(e)=>this.run("toggleEditable", task.id, e)}
-                     onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}
-                </span> &nbsp;
-           </li> )
-                ))}
-        </ul>
-        : <div>No tasks!</div>
-        }
-    </section>
+        <section id="todoZone" class="desktopOnly" ondragover="event.preventDefault()" ondrop={e => this.run('onDropTodo', e)}>
+            {state.tasks.filter(task => task.status==='open').length>0 ? 
+                <ul class="tasklist">
+                    {state.tasks.filter(task=>task.status==='open').map(task=>(
+                        ( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
+                            <span contenteditable={task.editing} 
+                                onclick={(e)=>this.run("toggleEditable", task.id, e)}
+                                onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}
+                            </span> &nbsp;
+                        </li> )
+                    ))}
+                </ul>
+                : <div>No tasks!</div>
+            }
+        </section>
 
-    <section id='doingZone' class="desktopOnly" ondragover="event.preventDefault()" ondrop={e => this.run('onDropDoing', e)}>
-        {state.tasks.filter(task => task.status==='in-progress').length>0 ? 
-        <ul class="tasklist">
-            {state.tasks.filter(task=>task.status==='in-progress').map(task=>(
-            ( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
-                <span contenteditable={task.editing} 
-                     onclick={(e)=>this.run("toggleEditable", task.id, e)}
-                     onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}
-                </span> &nbsp;
-           </li> )
-                ))}
-        </ul>
-        : <div>No doing tasks!</div>
-        }
-    </section>
+        <section id='doingZone' class="desktopOnly" ondragover="event.preventDefault()" ondrop={e => this.run('onDropDoing', e)}>
+            {state.tasks.filter(task => task.status==='in-progress').length>0 ? 
+                <ul class="tasklist">
+                    {state.tasks.filter(task=>task.status==='in-progress').map(task=>(
+                        ( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
+                            <span contenteditable={task.editing} 
+                                onclick={(e)=>this.run("toggleEditable", task.id, e)}
+                                onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}
+                            </span> &nbsp;
+                        </li> )
+                    ))}
+                </ul>
+                : <div>No doing tasks!</div>
+            }
+        </section>
 
-    <section id='doneZone' class="desktopOnly" ondragover="event.preventDefault()" ondrop={e => this.run('onDropDone', e)}>
-        {state.tasks.filter((task: Task) => task.status==='complete').length>0 ? 
-        <ul class="tasklist">
-        {state.tasks.filter((task:Task)=>task.status==='complete').map((task: Task)=>(
-        ( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
-            <span contenteditable={task.editing} 
-                onclick={(e)=>this.run("toggleEditable", task.id, e)}
-                onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}
-            </span> &nbsp;
-        </li> )
-         ))}
-        </ul>
-        : <div>No done tasks!</div>
-        }
+        <section id='doneZone' class="desktopOnly" ondragover="event.preventDefault()" ondrop={e => this.run('onDropDone', e)}>
+            {state.tasks.filter((task: Task) => task.status==='complete').length>0 ? 
+                <ul class="tasklist">
+                    {state.tasks.filter((task:Task)=>task.status==='complete').map((task: Task)=>(
+                        ( <li key={task} id={task.id} draggable="true" ondragstart={e => this.run('onDragStart', e)}>
+                            <span contenteditable={task.editing} 
+                                onclick={(e)=>this.run("toggleEditable", task.id, e)}
+                                onkeyup={(e)=>this.run("updateTask", task.id, e )}>{task.text}
+                            </span> &nbsp;
+                        </li> )
+                    ))}
+                </ul>
+                : <div>No done tasks!</div>
+            }
         </section>
         
     </div>
 
-    <form class="col align-self-center pull-bottom"id="newTask"onsubmit={e => this.run('addTask', e)} style="margin-top: 15px;">
-                    <input name="text" type="text" placeholder="Add a task" required/>
-                    <button class="btn btn-dark pull-right btn-sm">Add</button>
-                </form>
+    <form id="newTask"onsubmit={e => this.run('addTask', e)}>
+        <input name="text" type="text" placeholder="Add a task" required/>
+        <button>Add</button>
+    </form>
 
     <section id='deleteZone' ondragover="event.preventDefault()" ondrop={e => this.run('onDropDelete', e)}>
         <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
